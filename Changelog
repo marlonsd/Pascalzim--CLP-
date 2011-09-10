@@ -1,0 +1,13 @@
+// ------------------------------------------------------------
+//	Trabalho Conceitos de Linguagens de Programação
+//
+// Integrantes: Andre Peil, Daniel Retzlaff, Marlon Dias
+// Changelog
+// ------------------------------------------------------------
+
+09.set.2011: 
+	- Inicializado arquivo MatrizLU.pas.
+		- Contendo básico da separação da matriz.
+
+10.set.2011:
+	- Criado projeto no github.
