@@ -1,0 +1,33 @@
+	IF
+	;(ponto e virgula) do fim do if: Quando há if-else com o if contendo mais de 1 instrução o end não recebe ;(ponto e virgula) pois existe um else completando a condição. Isto ocorre pois o ;(ponto e virgula) só será utilizado quando a condição estiver completa 
+
+Estrutura em pascal é declarada como Record
+
+falar sobre a declaração de estrutura:
+1º Type até record:
+	Palavras reservadas a uma declaração de estruturas;
+	EX:Type matriz = record
+	   end;
+	Type : Referente a tipo;
+	matriz=record : referente a declaração da estrutura;
+	Entre Record e End é a definição do corpo da estrutura;
+	ex2: a:[1..4, 1..4] of real;
+
+	Vetor e Matriz
+	
+	Para declarar um vetor em pascal deve-se colocar o nomedavar , 2 pontos(:), array seguido do tamanho do vetor entre chaves ([1..4]), e seu tipo;
+	EM pascal a posição inicial do vetor nao é padrão, deve-se declarar o inicio e o fim do vetor entre ".." ex: [1..4], que define um vetor de 1 até 4;
+	Para se ter o comprimento deste vetor fazemos um calculo onde diminui-se o inicio do fim e soma-se mais 1. ex:fim=10,inicio=5 : 10-5+1=6, onde 6 é o comprimento do vetor;
+	PAra se ter um vetor bidimensional(matriz), colocamos o tamanho do primeiro seguido de ,(virgula) e o tamanho do segundo. ex: [1..4, 1..4].
+	
+2º Procedure
+	Procedimento - Aquele que, a priori, não retorna valor( parecido com o void do c);
+	declaraçao:	Procedure nomeproc(parametros)
+	
+	Procedure: indica o procedimento
+	nomeproc: nome do procedimento
+	parametros: nomeparamet: seutipo
+	Caso haja mais de um parametro eles serão separados por ;(ponto e virgula).
+	finaliza-se a inicialização do procedimento com ;(ponto e virgula).
+
+	Variaveis Globais
