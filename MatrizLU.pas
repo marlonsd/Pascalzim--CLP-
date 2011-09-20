@@ -5,24 +5,25 @@
 
 Program MatrizLU;
 Type matriz = Record
-	a: array[1..3 , 1..3] of real;
-	upper: array [1..3 , 1..3] of real;
-	lower: array [1..3 , 1..3] of real;
+	a: array[1..100 , 1..100] of real;
+	upper: array [1..100 , 1..100] of real;
+	lower: array [1..100 , 1..100] of real;
 End;
 
 
  Var mat: matriz;
-     i,j : integer;
+     i,j,flag, n : integer;
 
 
 
- Procedure decompLU (var mat: matriz);
+ Procedure decompLU ();
 	Var temp: real;
 		k: integer;
+	
 	Begin 				
-		For i:= 1 to 3 do
+		For i:= 1 to n do
 			Begin
-				For j:= 1 to 3 do
+				For j:= 1 to n do
 					Begin
 					if (i <= j) then
 						Begin
@@ -43,6 +44,7 @@ End;
 								If (mat.upper[j, j] = 0) then
 									Begin
 										writeln('Erro... Divisao por Zero');
+										flag:=1;
 										exit;
 									End
 									Else
@@ -59,13 +61,22 @@ End;
 	End;	
 		
  Begin
-
+	
+	Repeat
+		write('Tamanho da Matriz:');
+		readln(n);
+		if (n > 100) or (n <= 0) then
+			writeln('erro... valores validos entre 1 e 100.');
+			
+	Until ((n <= 100) and (n > 0)); 
+		
+	
   writeln('Matriz A: ');
-
   // Leitura da matriz A e inicializacao de matris LU
-  For i := 1 to 3 do
+
+  For i := 1 to n do
     Begin
-		For j := 1 to 3 do
+		For j := 1 to n do
 
 		Begin
 			write('A [',i, ',',j, ']: ');
@@ -77,22 +88,45 @@ End;
 	End;
 	
 	// Decomposicao LU
-	decompLU(mat);
+	flag:=0;
+	decompLU();
 
   // Impressao das matrizes
-  writeln('Matriz Comp: ');
-  For i:= 1 to 3 do
-     writeln(mat.a[i,1]:2:1,'  ', mat.a[i,2]:2:1,'  ', mat.a[i,3]:2:1);
+  if (flag = 1) then
+	exit;
 
+writeln('');
+	
+  writeln('Matriz Comp: ');
+  
+  For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do 
+			write(mat.a[i,j]:2:1,'  ');
+	End;
+  writeln('');
+  writeln('');
+  
   writeln('Matriz Low: ');
 
-  For i:= 1 to 3 do
-     writeln(mat.lower[i,1]:2:1,'  ',mat.lower[i,2]:2:1,'  ',mat.lower[i,3]:2:1);
+  For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do
+			write(mat.lower[i,j]:2:1,'  ');
+	End;
+  
+  writeln('');
+  writeln('');
   writeln('Matriz Up: ');
 
-  For i:= 1 to 3 do
-     writeln(mat.upper[i,1]:2:1,'  ',mat.upper[i,2]:2:1,'  ',mat.upper[i,3]:2:1);
-
+   For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do
+			write(mat.upper[i,j]:2:1,'  ');
+	End;
 
  End.
 
