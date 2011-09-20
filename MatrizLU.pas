@@ -1,73 +1,136 @@
 // -------------------------------------------------------------
-// Trabalho Conceitos de Linguagens de Programação
+// Trabalho Conceito e Linguagens de Programacao
 // Integrantes: Andre Peil, Daniel Retzlaff, Marlon Dias
 // -------------------------------------------------------------
 
 Program MatrizLU;
+Type matriz = Record
+	a: array[1..100 , 1..100] of real;
+	upper: array [1..100 , 1..100] of real;
+	lower: array [1..100 , 1..100] of real;
+End;
 
- Var mComp, mLow, mUp : array [ 1..4 , 1..4 ] of integer;
-     i,j : integer;
 
- Begin
+ Var mat: matriz;
+     i,j,flag, n : integer;
 
-  // Leitura da matriz completa
-  For i := 1 to 3 do
-    For j := 1 to 3 do
-     Begin
-       writeln('adsadasda[',i, ',',j, ']:');
-       readln(mComp[i, j]);
-     End;
 
+
+ Procedure decompLU ();
+	Var temp: real;
+		k: integer;
 	
-  // Calcula e insere valores nas matrizes auxiliares
-  For i:= 1 to 3  do
-    For j:= 1 to 3 do
-     Begin
-  // Se i e j forem diferentes entao
-       if (i <> j) then 
-		Begin 
-  // se i for maior que j entao preenche a matriz low     
-          if (i > j) then
-             mLow[i, j] := mComp[i, j]
-  // senao preenche com 1 (parte de cima)
-           else
-             mLow[i, j] := 1;
-  // se i for menor que j entao preenche a matriz up          
-          if (i < j) then
-             mUp[i, j] := mComp[i, j]
-  // senao preenche com 1 (parte de baixo)
-          else
-             mUp[i, j] := 1;
-  // senao, se i e j forem igual recebe 0
-        end
-        else
-        Begin
-        mLow[i, j] := 0;
-        mUp[i, j] := 0;
-	   end;
-	end;
+	Begin 				
+		For i:= 1 to n do
+			Begin
+				For j:= 1 to n do
+					Begin
+					if (i <= j) then
+						Begin
+						temp := 0;
+						For k := 1 to i do
+							Begin
+							temp := temp + (mat.lower[i, k]*mat.upper[k, j]);
+							End;
+						mat.upper[i, j] := mat.a[i, j] - temp;	
+						End
+						Else
+							Begin
+								temp := 0;
+								For k := 1 to j do
+									Begin
+									temp := temp + (mat.lower[i, k] * mat.upper[k, j]);
+									End;
+								If (mat.upper[j, j] = 0) then
+									Begin
+										writeln('Erro... Divisao por Zero');
+										flag:=1;
+										exit;
+									End
+									Else
+										Begin
+											mat.lower[i, j] := (mat.a[i, j] - temp) / mat.upper [j, j];
+										End;
+							End;
+						
+					
+					End;
+			End;
+
+		
+	End;	
+		
+ Begin
+	
+	Repeat
+		write('Tamanho da Matriz:');
+		readln(n);
+		if (n > 100) or (n <= 0) then
+			writeln('erro... valores validos entre 1 e 100.');
+			
+	Until ((n <= 100) and (n > 0)); 
+		
+	
+  writeln('Matriz A: ');
+  // Leitura da matriz A e inicializacao de matris LU
+
+  For i := 1 to n do
+    Begin
+		For j := 1 to n do
+
+		Begin
+			write('A [',i, ',',j, ']: ');
+			readln(mat.a[i, j]);
+			mat.lower[i, j] := 0;
+			mat.upper[i, j] := 0;
+		End;
+    mat.lower[i, i] := 1;
+	End;
+	
+	// Decomposicao LU
+	flag:=0;
+	decompLU();
+
   // Impressao das matrizes
+  if (flag = 1) then
+	exit;
+
+writeln('');
+	
   writeln('Matriz Comp: ');
-  For i:= 1 to 3 do
-     writeln(mComp[i,1]:4, mComp[i,2]:4, mComp[i,3]:4);
+  
+  For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do 
+			write(mat.a[i,j]:2:1,'  ');
+	End;
+  writeln('');
+  writeln('');
   
   writeln('Matriz Low: ');
+
+  For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do
+			write(mat.lower[i,j]:2:1,'  ');
+	End;
   
-  For i:= 1 to 3 do
-     writeln(mLow[i,1]:4, mLow[i,2]:4, mLow[i,3]:4);
+  writeln('');
+  writeln('');
   writeln('Matriz Up: ');
-  
-  For i:= 1 to 3 do
-     writeln(mUp[i,1]:4, mUp[i,2]:4, mUp[i,3]:4);
-  
 
-  
-  
-
+   For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do
+			write(mat.upper[i,j]:2:1,'  ');
+	End;
 
  End.
- 
- 
- 
- 
- 
+
+
+
+
+
