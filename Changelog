@@ -6,8 +6,12 @@
 // ------------------------------------------------------------
 
 09.set.2011: 
-	- Inicializado arquivo MatrizLU.pas.
+	- Inicializado arquivo MatrizLU.pas. [Marlon]
 		- Contendo básico da separação da matriz.
 
 10.set.2011:
-	- Criado projeto no github.
+	- Criado projeto no github. [Marlon]
+
+20.set.2001:
+	- Finalizado programa de Decomposição LU [André, Daniel, Marlon]
+	- Iniciado parte escrita [Daniel]
