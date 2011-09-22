@@ -1,0 +1,239 @@
+Slide 1
+Introcução:
+O que é pascal
+
+Pascal é uma linguagem de programação estruturada, que recebeu este nome em homenagem ao matemático Blaise Pascal. Foi criada em 1970 pelo suíço Niklaus Wirth, com o intuito de ensinar programação estruturada.
+
+Decomposição LU
+
+O processo de Fatoração LU é usado para resolver sistemas
+lineares. Consiste na decomposição da matriz A em um produto de
+matrizes L e U, então é resolvida uma sequência de sistemas lineares de modo
+a se obter a solução do sistema linear original.
+
+// A decomposição LU consiste em dividir uma matriz original em duas trinangulares, uma superior (U) e a outra a inferior (L). E, através da multiplicação
+//delas (L U) chega-se na matriz original (A).
+
+Slide 2
+Código:
+
+
+Program MatrizLU;
+Type matriz = Record
+	a: array[1..100 , 1..100] of real;
+	upper: array [1..100 , 1..100] of real;
+	lower: array [1..100 , 1..100] of real;
+End;
+
+
+ Var mat: matriz;
+     i,j,flag, n : integer;
+
+
+	* Program
+	* Estrutura
+	* Variaveis Globais
+	* Arrays
+
+Slide 3
+Código 2:
+
+Procedure decompLU ();
+	Var temp: real;
+	k: integer;
+	
+	Begin 				
+		For i:= 1 to n do
+		  Begin
+		    For j:= 1 to n do
+		      Begin
+
+	*Procedimentos
+	*Laços
+	*Delimitadores de operação
+
+Slide 4
+Código 3:
+	if (i <= j) then
+		Begin
+		temp := 0;
+		For k := 1 to i do
+		Begin
+		temp := temp + (mat.lower[i, k]*mat.upper[k, j]);
+		End;
+		mat.upper[i, j] := mat.a[i, j] - temp;	
+	End
+
+	*Bloco referente a criação da matriz Upper
+
+// Laço de i e j percorre a matriz, e, logo após é utilizada um somatório entre as matrizes Lower e Upper para tirar este valor da matriz original e formar o
+//elemento i, j da Upper.
+
+Slide 5
+Código 4:
+
+
+						Else
+							Begin
+								temp := 0;
+								For k := 1 to j do
+									Begin
+									temp := temp + (mat.lower[i, k] * mat.upper[k, j]);
+									End;
+								If (mat.upper[j, j] = 0) then
+									Begin
+										writeln('Erro... Divisao por Zero');
+										flag:=1;
+										exit;
+									End
+									Else
+										Begin
+											mat.lower[i, j] := (mat.a[i, j] - temp) / mat.upper [j, j];
+										End;
+							End;
+
+
+
+	*Bloco referente a criação da matriz lower
+	*Determinante zero
+
+//É feito o somatório em uma variável temporária para tirar este valor do matriz A e, depois, dividir esse último pelo valor já computado da matriz upper.
+//If evitar divisão por zero e, consequentemente, matriz com determinante 
+
+
+
+Slide 6
+Código 5:
+
+ Begin
+	
+	Repeat
+		write('Tamanho da Matriz:');
+		readln(n);
+		if (n > 100) or (n <= 0) then
+			writeln('erro... valores validos entre 1 e 100.');
+			
+	Until ((n <= 100) and (n > 0)); 
+
+	* Verificação de valor válido
+
+Slide 7
+Código 6:
+
+  writeln('Matriz A: ');
+
+  For i := 1 to n do
+    Begin
+		For j := 1 to n do
+
+		Begin
+			write('A [',i, ',',j, ']: ');
+			readln(mat.a[i, j]);
+			mat.lower[i, j] := 0;
+			mat.upper[i, j] := 0;
+		End;
+    mat.lower[i, i] := 1;
+	End;
+
+	* Leitura da Matriz
+Slide 8
+Código 7:
+
+	flag:=0;
+	decompLU();
+
+	 if (flag = 1) then
+	exit;
+
+	*Chamada de procedimento
+	*Verificação da flag (determinante zero)
+Slide 9
+Código 8:
+
+
+writeln('');
+	
+  writeln('Matriz Comp: ');
+  
+  For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do 
+			write(mat.a[i,j]:2:1,'  ');
+	End;
+  writeln('');
+  writeln('');
+  
+  writeln('Matriz Low: ');
+
+  For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do
+			write(mat.lower[i,j]:2:1,'  ');
+	End;
+  
+  writeln('');
+  writeln('');
+  writeln('Matriz Up: ');
+
+   For i:= 1 to n do
+	Begin
+		writeln('');
+		For j:= 1 to n do
+			write(mat.upper[i,j]:2:1,'  ');
+	End;
+
+	*Impressão das Matrizes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	IF
+	;(ponto e virgula) do fim do if: Quando há if-else com o if contendo mais de 1 instrução o end não recebe ;(ponto e virgula) pois existe um else completando a condição. Isto ocorre pois o ;(ponto e virgula) só será utilizado quando a condição estiver completa 
+
+Estrutura em pascal é declarada como Record
+
+falar sobre a declaração de estrutura:
+1º Type até record:
+	Palavras reservadas a uma declaração de estruturas;
+	EX:Type matriz = record
+	   end;
+	Type : Referente a tipo;
+	matriz=record : referente a declaração da estrutura;
+	Entre Record e End é a definição do corpo da estrutura;
+	ex2: a:[1..4, 1..4] of real;
+
+	Vetor e Matriz
+	
+	Para declarar um vetor em pascal deve-se colocar o nomedavar , 2 pontos(:), array seguido do tamanho do vetor entre chaves ([1..4]), e seu tipo;
+	EM pascal a posição inicial do vetor nao é padrão, deve-se declarar o inicio e o fim do vetor entre ".." ex: [1..4], que define um vetor de 1 até 4;
+	Para se ter o comprimento deste vetor fazemos um calculo onde diminui-se o inicio do fim e soma-se mais 1. ex:fim=10,inicio=5 : 10-5+1=6, onde 6 é o comprimento do vetor;
+	PAra se ter um vetor bidimensional(matriz), colocamos o tamanho do primeiro seguido de ,(virgula) e o tamanho do segundo. ex: [1..4, 1..4].
+	
+2º Procedure
+	Procedimento - Aquele que, a priori, não retorna valor( parecido com o void do c);
+	declaraçao:	Procedure nomeproc(parametros)
+	
+	Procedure: indica o procedimento
+	nomeproc: nome do procedimento
+	parametros: nomeparamet: seutipo
+	Caso haja mais de um parametro eles serão separados por ;(ponto e virgula).
+	finaliza-se a inicialização do procedimento com ;(ponto e virgula).
+
+	Variaveis Globais
+

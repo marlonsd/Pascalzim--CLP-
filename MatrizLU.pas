@@ -27,12 +27,12 @@ End;
 					Begin
 					if (i <= j) then
 						Begin
-						temp := 0;
-						For k := 1 to i do
-							Begin
-							temp := temp + (mat.lower[i, k]*mat.upper[k, j]);
-							End;
-						mat.upper[i, j] := mat.a[i, j] - temp;	
+							temp := 0;
+							For k := 1 to i do
+								Begin
+								temp := temp + (mat.lower[i, k]*mat.upper[k, j]);
+								End;
+							mat.upper[i, j] := mat.a[i, j] - temp;	
 						End
 						Else
 							Begin
