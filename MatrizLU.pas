@@ -12,7 +12,8 @@ End;
 
 
  Var mat: matriz;
-     i,j,flag, n : integer;
+     i, j, n : integer;
+     flag: boolean;
 
 
 
@@ -44,7 +45,7 @@ End;
 								If (mat.upper[j, j] = 0) then
 									Begin
 										writeln('Erro... Divisao por Zero');
-										flag:=1;
+										flag:=true;
 										exit;
 									End
 									Else
@@ -63,7 +64,7 @@ End;
  Begin
 	
 	Repeat
-		write('Tamanho da Matriz:');
+		write('Tamanho da Matriz: ');
 		readln(n);
 		if (n > 100) or (n <= 0) then
 			writeln('erro... valores validos entre 1 e 100.');
@@ -88,11 +89,11 @@ End;
 	End;
 	
 	// Decomposicao LU
-	flag:=0;
+	flag:=false;
 	decompLU();
 
   // Impressao das matrizes
-  if (flag = 1) then
+  if (flag) then
 	exit;
 
 writeln('');
